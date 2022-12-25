@@ -2,6 +2,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Core.Interfaces;
+using API.Helpers;
 
 namespace API
 {
@@ -20,10 +21,13 @@ namespace API
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddControllers();
             services.AddDbContext<StoreContext>(oprions => oprions.UseSqlite(_configuration.GetConnectionString("DefaultConnection")));
+            services.AddAutoMapper(typeof(MappingProfiles));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
             });
+
+            services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +43,7 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
