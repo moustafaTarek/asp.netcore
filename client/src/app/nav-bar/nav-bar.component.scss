@@ -1,0 +1,13 @@
+.cart-no{
+    //law 3oz tdey position absolute  lazm el parent yab2a relative
+    position: absolute;
+    min-height: 25px;
+    min-width: 25px;
+    background-color: blue;
+    text-align: center;
+    border-radius: 50%;
+    color: white;
+    font-size: 1em;
+    top: -12px;
+    right: 32px;
+}
